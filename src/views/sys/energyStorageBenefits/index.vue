@@ -4,7 +4,7 @@
       <div class="flex justify-between items-center">
         <span class="flex-1">
           <a :href="GITHUB_URL" target="_blank">{{ name }}</a>
-          关于
+          储能收益
         </span>
       </div>
     </template>

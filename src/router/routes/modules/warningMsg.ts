@@ -4,23 +4,23 @@ import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
 
 const dashboard: AppRouteModule = {
-  path: '/about',
-  name: 'About',
+  path: '/warningMsg',
+  name: 'WarningMsg',
   component: LAYOUT,
-  redirect: '/about/index',
+  redirect: '/warningMsg/index',
   meta: {
     hideChildrenInMenu: true,
     icon: 'simple-icons:about-dot-me',
-    title: t('routes.dashboard.about'),
-    orderNo: 2,
+    title: t('routes.dashboard.warningMsg'),
+    orderNo: 5,
   },
   children: [
     {
       path: 'index',
-      name: 'AboutPage',
-      component: () => import('/@/views/sys/about/index.vue'),
+      name: 'WarningMsgPage',
+      component: () => import('/@/views/sys/warningMsg/index.vue'),
       meta: {
-        title: t('routes.dashboard.about'),
+        title: t('routes.dashboard.warningMsg'),
         icon: 'simple-icons:about-dot-me',
         hideMenu: true,
       },

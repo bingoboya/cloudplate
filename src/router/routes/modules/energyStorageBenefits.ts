@@ -4,23 +4,23 @@ import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
 
 const dashboard: AppRouteModule = {
-  path: '/about',
-  name: 'About',
+  path: '/energyStorageBenefits',
+  name: 'EnergyStorageBenefits',
   component: LAYOUT,
-  redirect: '/about/index',
+  redirect: '/energyStorageBenefits/index',
   meta: {
     hideChildrenInMenu: true,
     icon: 'simple-icons:about-dot-me',
-    title: t('routes.dashboard.about'),
-    orderNo: 2,
+    title: t('routes.dashboard.energyStorageBenefits'),
+    orderNo: 6,
   },
   children: [
     {
       path: 'index',
-      name: 'AboutPage',
-      component: () => import('/@/views/sys/about/index.vue'),
+      name: 'EnergyStorageBenefitsPage',
+      component: () => import('/@/views/sys/energyStorageBenefits/index.vue'),
       meta: {
-        title: t('routes.dashboard.about'),
+        title: t('routes.dashboard.energyStorageBenefits'),
         icon: 'simple-icons:about-dot-me',
         hideMenu: true,
       },

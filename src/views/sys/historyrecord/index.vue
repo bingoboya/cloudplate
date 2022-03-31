@@ -4,8 +4,8 @@
       <div class="flex justify-between items-center">
         <span class="flex-1">
           <a :href="GITHUB_URL" target="_blank">{{ name }}</a>
-          关于
-        </span>
+          历史记录</span
+        >
       </div>
     </template>
     <Description @register="infoRegister" class="enter-y" />

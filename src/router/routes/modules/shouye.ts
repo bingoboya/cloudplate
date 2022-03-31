@@ -4,23 +4,23 @@ import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
 
 const dashboard: AppRouteModule = {
-  path: '/about',
-  name: 'About',
+  path: '/shouye',
+  name: 'Shouye',
   component: LAYOUT,
-  redirect: '/about/index',
+  redirect: '/shouye/index',
   meta: {
     hideChildrenInMenu: true,
     icon: 'simple-icons:about-dot-me',
-    title: t('routes.dashboard.about'),
-    orderNo: 2,
+    title: t('routes.dashboard.shouye'),
+    orderNo: 3,
   },
   children: [
     {
       path: 'index',
-      name: 'AboutPage',
-      component: () => import('/@/views/sys/about/index.vue'),
+      name: 'ShouyePage',
+      component: () => import('/@/views/sys/shouye/index.vue'),
       meta: {
-        title: t('routes.dashboard.about'),
+        title: t('routes.dashboard.shouye'),
         icon: 'simple-icons:about-dot-me',
         hideMenu: true,
       },
