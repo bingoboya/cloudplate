@@ -30,7 +30,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
   const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY, VITE_DROP_CONSOLE } = viteEnv;
 
   const isBuild = command === 'build';
-
+  console.log('VITE_PORT--', VITE_PORT, createProxy(VITE_PROXY));
   return {
     base: VITE_PUBLIC_PATH,
     root,
@@ -50,14 +50,43 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
           find: /\/#\//,
           replacement: pathResolve('types') + '/',
         },
+        {
+          find: 'components',
+          replacement: resolve(__dirname, 'src/components'),
+        },
+        {
+          find: '@',
+          replacement: resolve(__dirname, 'src'),
+        },
+        {
+          find: 'apis',
+          replacement: resolve(__dirname, 'src/apis'),
+        },
+        {
+          find: 'views',
+          replacement: resolve(__dirname, 'src/views'),
+        },
+        {
+          find: 'components',
+          replacement: resolve(__dirname, 'src/components'),
+        },
       ],
     },
     server: {
       // Listening on all local IPs
-      host: true,
+      host: false,
       port: VITE_PORT,
       // Load proxy configuration from .env
-      proxy: createProxy(VITE_PROXY),
+      // proxy: createProxy(VITE_PROXY),
+      // proxy: {
+      //   '/basic-api': {
+      //     target: 'https://www.fastmock.site/mock/23a93d9800a894dc5f7bff1d4412b2b8/api',
+      //     // target: 'http://localhost:3000',
+      //     changeOrigin: true,
+      //     ws: true,
+      //     rewrite: (path) => path.replace(new RegExp(`^/basic-api`), ''),
+      //   },
+      // },
     },
     build: {
       target: 'es2015',

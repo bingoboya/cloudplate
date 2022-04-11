@@ -21,7 +21,7 @@ export function getAppEnvConfig() {
     ? // Get the global configuration (the configuration will be extracted independently when packaging)
       (import.meta.env as unknown as GlobEnvConfig)
     : window[ENV_NAME as any]) as unknown as GlobEnvConfig;
-
+  // console.log('ENV--', ENV);
   const {
     VITE_GLOB_APP_TITLE,
     VITE_GLOB_API_URL,

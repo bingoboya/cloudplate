@@ -21,7 +21,7 @@ import { registerGlobComp } from '/@/components/registerGlobComp';
 if (import.meta.env.DEV) {
   import('ant-design-vue/dist/antd.less');
 }
-
+console.log('import.meta.env', import.meta.env);
 async function bootstrap() {
   const app = createApp(App);
 

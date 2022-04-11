@@ -1,5 +1,6 @@
 <template>
-  <Card title="访问来源" :loading="loading">
+<!-- 访问来源 -->
+  <Card title="" :loading="loading">
     <div ref="chartRef" :style="{ width, height }"></div>
   </Card>
 </template>

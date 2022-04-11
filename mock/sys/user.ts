@@ -50,6 +50,31 @@ export default [
     timeout: 200,
     method: 'post',
     response: ({ body }) => {
+      console.log('asdasdasdasda');
+      const { username, password } = body;
+      const checkUser = createFakeUserList().find(
+        (item) => item.username === username && password === item.password,
+      );
+      if (!checkUser) {
+        return resultError('Incorrect account or password！');
+      }
+      const { userId, username: _username, token, realName, desc, roles } = checkUser;
+      return resultSuccess({
+        roles,
+        userId,
+        username: _username,
+        token,
+        realName,
+        desc,
+      });
+    },
+  },
+  {
+    url: '/basic-api/loginApiTest',
+    timeout: 200,
+    method: 'post',
+    response: ({ body }) => {
+      console.log('1111asdasdasdasda');
       const { username, password } = body;
       const checkUser = createFakeUserList().find(
         (item) => item.username === username && password === item.password,
@@ -78,7 +103,7 @@ export default [
       if (!checkUser) {
         return resultError('The corresponding user information was not obtained!');
       }
-      return resultSuccess(checkUser);
+      return resultSuccess({ ...checkUser, realName: 'a1sda' });
     },
   },
   {

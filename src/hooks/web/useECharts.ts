@@ -26,6 +26,8 @@ export function useECharts(
   resizeFn = useDebounceFn(resize, 200);
 
   const getOptions = computed(() => {
+    console.log('cacheOptions.value', cacheOptions.value);
+    
     if (getDarkMode.value !== 'dark') {
       return cacheOptions.value as EChartsOption;
     }
@@ -56,7 +58,8 @@ export function useECharts(
     }
   }
 
-  function setOptions(options: EChartsOption, clear = true) {
+  // function setOptions(options: EChartsOption, clear = true) {
+  function setOptions(options, clear = true) {
     cacheOptions.value = options;
     if (unref(elRef)?.offsetHeight === 0) {
       useTimeoutFn(() => {
