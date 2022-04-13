@@ -16,6 +16,10 @@ import { configImageminPlugin } from './imagemin';
 import { configSvgIconsPlugin } from './svgSprite';
 import { configHmrPlugin } from './hmr';
 
+import AutoImport from 'unplugin-auto-import/vite';
+import ViteComponents from 'unplugin-vue-components/vite';
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
+
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   const {
     VITE_USE_IMAGEMIN,
@@ -28,6 +32,22 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   const vitePlugins: (Plugin | Plugin[])[] = [
     // have to
     vue(),
+    //
+    AutoImport({
+      include: [
+        /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+        /\.vue$/,
+        /\.vue\?vue/, // .vue
+        /\.md$/, // .md
+      ],
+      dts: true,
+      imports: ['vue', 'vue-router', 'vue-i18n', '@vueuse/head', '@vueuse/core'],
+    }),
+    //
+    ViteComponents({
+      resolvers: [AntDesignVueResolver()],
+      dts: true, // enabled by default if `typescript` is installed
+    }),
     // have to
     vueJsx(),
     // support name
