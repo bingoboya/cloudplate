@@ -1,97 +1,42 @@
 <template>
-  <PageWrapper title="关于">
-    <template #headerContent>
-      <div class="flex justify-between items-center">
-        <span class="flex-1">
-          <a :href="GITHUB_URL" target="_blank">{{ name }}</a>
-          监控</span
-        >
-      </div>
-    </template>
-    <Description @register="infoRegister" class="enter-y" />
-    <Description @register="register" class="my-4 enter-y" />
-    <Description @register="registerDev" class="enter-y" />
-  </PageWrapper>
+  <div>
+    <!-- header -->
+    <div style="display: flex">
+      <a-button>全局</a-button>
+      <a-button>PCS</a-button>
+      <a-button>BMS</a-button>
+      <a-button>电池簇</a-button>
+    </div>
+    <!-- g6 -->
+    <div></div>
+    <!-- bottom -->
+    <OperateEfficiency :options="state.cemsSysInfoEfficiency" :loading="loading" class="enter-y" />
+  </div>
 </template>
-<script lang="ts" setup>
-  import { h } from 'vue';
-  import { Tag } from 'ant-design-vue';
-  import { PageWrapper } from '/@/components/Page';
-  import { Description, DescItem, useDescription } from '/@/components/Description/index';
-  import { GITHUB_URL, SITE_URL, DOC_URL } from '/@/settings/siteSetting';
 
-  const { pkg, lastBuildTime } = __APP_INFO__;
-
-  const { dependencies, devDependencies, name, version } = pkg;
-
-  const schema: DescItem[] = [];
-  const devSchema: DescItem[] = [];
-
-  const commonTagRender = (color: string) => (curVal) => h(Tag, { color }, () => curVal);
-  const commonLinkRender = (text: string) => (href) => h('a', { href, target: '_blank' }, text);
-
-  const infoSchema: DescItem[] = [
-    {
-      label: '版本',
-      field: 'version',
-      render: commonTagRender('blue'),
-    },
-    {
-      label: '最后编译时间',
-      field: 'lastBuildTime',
-      render: commonTagRender('blue'),
-    },
-    {
-      label: '文档地址',
-      field: 'doc',
-      render: commonLinkRender('文档地址'),
-    },
-    {
-      label: '预览地址',
-      field: 'preview',
-      render: commonLinkRender('预览地址'),
-    },
-    {
-      label: 'Github',
-      field: 'github',
-      render: commonLinkRender('Github'),
-    },
-  ];
-
-  const infoData = {
-    version,
-    lastBuildTime,
-    doc: DOC_URL,
-    preview: SITE_URL,
-    github: GITHUB_URL,
+<script setup>
+  import { defHttp } from '/@/utils/http/axios';
+  import OperateEfficiency from '/@/components/OperateEfficiency/index.vue';
+  const state = reactive({
+    cemsSysInfoEfficiency: [],
+  });
+  const optionsListApi = (params) => defHttp.get({ url: '/getshouye/homepage', params });
+  const getUserInfomation = async () => {
+    const res = await optionsListApi();
+    const { cemsSysInfoEfficiency } = res;
+    state.cemsSysInfoEfficiency = cemsSysInfoEfficiency;
   };
-
-  Object.keys(dependencies).forEach((key) => {
-    schema.push({ field: key, label: key });
+  getUserInfomation();
+  const task = setInterval(() => {
+    getUserInfomation();
+  }, 3000);
+  onBeforeUnmount(() => {
+    clearInterval(task);
   });
-
-  Object.keys(devDependencies).forEach((key) => {
-    devSchema.push({ field: key, label: key });
-  });
-
-  const [register] = useDescription({
-    title: '生产环境依赖',
-    data: dependencies,
-    schema: schema,
-    column: 3,
-  });
-
-  const [registerDev] = useDescription({
-    title: '开发环境依赖',
-    data: devDependencies,
-    schema: devSchema,
-    column: 3,
-  });
-
-  const [infoRegister] = useDescription({
-    title: '项目信息',
-    data: infoData,
-    schema: infoSchema,
-    column: 2,
-  });
+  const loading = ref(true);
+  setTimeout(() => {
+    loading.value = false;
+  }, 1500);
 </script>
+
+<style lang="scss" scoped></style>

@@ -57,8 +57,9 @@
 </template>
 <script setup>
   import { defHttp } from '/@/utils/http/axios';
+  // import { reactive, ref, toRaw, onBeforeUnmount } from 'vue';
   import GrowCard from './components/GrowCard.vue';
-  import OperateEfficiency from './components/OperateEfficiency.vue';
+  import OperateEfficiency from '/@/components/OperateEfficiency/index.vue';
   import SiteAnalysis from './components/SiteAnalysis.vue';
   import NewEnergyPcsCharts from '/@/components/Echarts/NewEnergyPcsCharts.vue';
   const state = reactive({
