@@ -18,7 +18,7 @@ import { configHmrPlugin } from './hmr';
 
 import AutoImport from 'unplugin-auto-import/vite';
 import ViteComponents from 'unplugin-vue-components/vite';
-import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
+import { AntDesignVueResolver, ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   const {
@@ -42,10 +42,11 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
       ],
       dts: true,
       imports: ['vue', 'vue-router', 'vue-i18n', '@vueuse/head', '@vueuse/core'],
+      resolvers: [ElementPlusResolver(), AntDesignVueResolver()]
     }),
     //
     ViteComponents({
-      resolvers: [AntDesignVueResolver()],
+      resolvers: [AntDesignVueResolver(), ElementPlusResolver()],
       dts: true, // enabled by default if `typescript` is installed
     }),
     // have to

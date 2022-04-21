@@ -5,7 +5,6 @@
         :choseList="state.choseList1" :curChosed="state.curChosed1"
         @chose-comp="(val) => state.curChosed1 = val" />
     </div>
-    <div>sss</div>
     <div>
       <div v-show="state.curChosed1 === 1" class="enter-y w-full">
         <BenifitsCharts :options="state.sysPoweroptions" :yTitle="['储能系统有功功率', '储能系统无功功率']" :loading="loading" />
