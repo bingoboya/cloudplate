@@ -1,24 +1,24 @@
-import type { Plugin } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import vueJsx from '@vitejs/plugin-vue-jsx';
-import legacy from '@vitejs/plugin-legacy';
-import purgeIcons from 'vite-plugin-purge-icons';
-import windiCSS from 'vite-plugin-windicss';
-import vueSetupExtend from 'vite-plugin-vue-setup-extend';
-import { configHtmlPlugin } from './html';
-import { configPwaConfig } from './pwa';
-import { configMockPlugin } from './mock';
-import { configCompressPlugin } from './compress';
-import { configStyleImportPlugin } from './styleImport';
-import { configVisualizerConfig } from './visualizer';
-import { configThemePlugin } from './theme';
-import { configImageminPlugin } from './imagemin';
-import { configSvgIconsPlugin } from './svgSprite';
-import { configHmrPlugin } from './hmr';
+import type { Plugin } from "vite";
+import vue from "@vitejs/plugin-vue";
+import vueJsx from "@vitejs/plugin-vue-jsx";
+import legacy from "@vitejs/plugin-legacy";
+import purgeIcons from "vite-plugin-purge-icons";
+import windiCSS from "vite-plugin-windicss";
+import vueSetupExtend from "vite-plugin-vue-setup-extend";
+import { configHtmlPlugin } from "./html";
+import { configPwaConfig } from "./pwa";
+import { configMockPlugin } from "./mock";
+import { configCompressPlugin } from "./compress";
+import { configStyleImportPlugin } from "./styleImport";
+import { configVisualizerConfig } from "./visualizer";
+import { configThemePlugin } from "./theme";
+import { configImageminPlugin } from "./imagemin";
+import { configSvgIconsPlugin } from "./svgSprite";
+import { configHmrPlugin } from "./hmr";
 
-import AutoImport from 'unplugin-auto-import/vite';
-import ViteComponents from 'unplugin-vue-components/vite';
-import { AntDesignVueResolver, ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import AutoImport from "unplugin-auto-import/vite";
+import ViteComponents from "unplugin-vue-components/vite";
+import { AntDesignVueResolver, ElementPlusResolver } from "unplugin-vue-components/resolvers";
 
 export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   const {
@@ -41,8 +41,8 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
         /\.md$/, // .md
       ],
       dts: true,
-      imports: ['vue', 'vue-router', 'vue-i18n', '@vueuse/head', '@vueuse/core'],
-      resolvers: [ElementPlusResolver(), AntDesignVueResolver()]
+      imports: ["vue", "vue-router", "vue-i18n", "@vueuse/head", "@vueuse/core"],
+      resolvers: [ElementPlusResolver()],
     }),
     //
     ViteComponents({
@@ -92,7 +92,7 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
 
     // rollup-plugin-gzip
     vitePlugins.push(
-      configCompressPlugin(VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE),
+      configCompressPlugin(VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE)
     );
 
     // vite-plugin-pwa
