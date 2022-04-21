@@ -92,7 +92,7 @@ const transform: AxiosTransform = {
     }
 
     if (apiUrl && isString(apiUrl)) {
-      console.log('configurl--', apiUrl, config.url);
+      // console.log('configurl--', apiUrl, config.url);
       config.url = `${apiUrl}${config.url}`;
     }
     const params = config.params || {};

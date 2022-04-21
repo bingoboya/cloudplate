@@ -34,6 +34,8 @@
   "dependencies": {
     "@ant-design/colors": "^6.0.0",
     "@ant-design/icons-vue": "^6.0.1",
+    "@antv/chart-node-g6": "^0.0.4",
+    "@antv/g6": "^4.6.4",
     "@iconify/iconify": "^2.0.4",
     "@vueuse/core": "^6.7.4",
     "@vueuse/shared": "^6.7.4",
@@ -41,6 +43,7 @@
     "ant-design-vue": "2.2.8",
     "axios": "^0.24.0",
     "crypto-js": "^4.1.1",
+    "dayjs": "^1.11.0",
     "echarts": "^5.2.2",
     "js-cookie": "^3.0.1",
     "lodash-es": "^4.17.21",

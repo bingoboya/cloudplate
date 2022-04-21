@@ -1,97 +1,23 @@
 <template>
-  <PageWrapper title="关于">
-    <template #headerContent>
-      <div class="flex justify-between items-center">
-        <span class="flex-1">
-          <a :href="GITHUB_URL" target="_blank">{{ name }}</a>
-          历史记录</span
-        >
-      </div>
-    </template>
-    <Description @register="infoRegister" class="enter-y" />
-    <Description @register="register" class="my-4 enter-y" />
-    <Description @register="registerDev" class="enter-y" />
-  </PageWrapper>
+  <div style="padding: 20px">
+    <div style="justify-content: center; display: flex;">历史记录</div>
+    <div style="margin-bottom: 10px">
+      <a-button @click="state.mode = 1">日历模式</a-button>
+      <a-button @click="state.mode = 2">列表模式</a-button>
+    </div>
+    <SeloMode v-if="state.mode === 1" />
+    <ListMode v-else />
+  </div>
 </template>
-<script lang="ts" setup>
-  import { h } from 'vue';
-  import { Tag } from 'ant-design-vue';
-  import { PageWrapper } from '/@/components/Page';
-  import { Description, DescItem, useDescription } from '/@/components/Description/index';
-  import { GITHUB_URL, SITE_URL, DOC_URL } from '/@/settings/siteSetting';
 
-  const { pkg, lastBuildTime } = __APP_INFO__;
+<script setup>
+import SeloMode from './SeloMode.vue'
+import ListMode from './ListMode.vue'
+const state = reactive({
+  mode: 2
+})
 
-  const { dependencies, devDependencies, name, version } = pkg;
-
-  const schema: DescItem[] = [];
-  const devSchema: DescItem[] = [];
-
-  const commonTagRender = (color: string) => (curVal) => h(Tag, { color }, () => curVal);
-  const commonLinkRender = (text: string) => (href) => h('a', { href, target: '_blank' }, text);
-
-  const infoSchema: DescItem[] = [
-    {
-      label: '版本',
-      field: 'version',
-      render: commonTagRender('blue'),
-    },
-    {
-      label: '最后编译时间',
-      field: 'lastBuildTime',
-      render: commonTagRender('blue'),
-    },
-    {
-      label: '文档地址',
-      field: 'doc',
-      render: commonLinkRender('文档地址'),
-    },
-    {
-      label: '预览地址',
-      field: 'preview',
-      render: commonLinkRender('预览地址'),
-    },
-    {
-      label: 'Github',
-      field: 'github',
-      render: commonLinkRender('Github'),
-    },
-  ];
-
-  const infoData = {
-    version,
-    lastBuildTime,
-    doc: DOC_URL,
-    preview: SITE_URL,
-    github: GITHUB_URL,
-  };
-
-  Object.keys(dependencies).forEach((key) => {
-    schema.push({ field: key, label: key });
-  });
-
-  Object.keys(devDependencies).forEach((key) => {
-    devSchema.push({ field: key, label: key });
-  });
-
-  const [register] = useDescription({
-    title: '生产环境依赖',
-    data: dependencies,
-    schema: schema,
-    column: 3,
-  });
-
-  const [registerDev] = useDescription({
-    title: '开发环境依赖',
-    data: devDependencies,
-    schema: devSchema,
-    column: 3,
-  });
-
-  const [infoRegister] = useDescription({
-    title: '项目信息',
-    data: infoData,
-    schema: infoSchema,
-    column: 2,
-  });
 </script>
+<style lang="less" scoped>
+
+</style>

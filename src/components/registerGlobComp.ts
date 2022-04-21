@@ -1,4 +1,5 @@
 import type { App } from 'vue';
+import { BingoTabs } from './BingoTabs';
 import { Button } from './Button';
 import {
   // Need
@@ -14,5 +15,5 @@ export function registerGlobComp(app: App) {
     app.component(comp.name || comp.displayName, comp);
   });
 
-  app.use(Input).use(Button).use(Layout);
+  app.use(Input).use(Button).use(Layout).use(BingoTabs);
 }

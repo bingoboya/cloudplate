@@ -3,16 +3,16 @@ import type { AppRouteModule } from '/@/router/types';
 import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
 
-// 优化调度
 const dashboard: AppRouteModule = {
   path: '/optimizedschedule',
   name: 'Optimizedschedule',
   component: LAYOUT,
   redirect: '/optimizedschedule/strategyoptimizate',
   meta: {
-    orderNo: 7,
+    hideChildrenInMenu: false,
     icon: 'ion:grid-outline',
-    title: t('routes.dashboard.strategyoptimizate'),
+    title: t('routes.dashboard.optimizedscheduleTitle'),
+    orderNo: 7,
   },
   children: [
     {

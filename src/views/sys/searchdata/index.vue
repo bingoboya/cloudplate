@@ -1,97 +1,62 @@
 <template>
-  <PageWrapper title="关于">
-    <template #headerContent>
-      <div class="flex justify-between items-center">
-        <span class="flex-1">
-          <a :href="GITHUB_URL" target="_blank">{{ name }}</a>
-          数据查询</span
-        >
+  <div>
+    <!-- header -->
+    <div class="pop-tab">
+      <div
+        :class="{ tab: true, checked: item.checked }"
+        v-for="item in state.choseList"
+        :key="item.code"
+        @click="choseType(item)"
+      >
+        {{ item.label }}
       </div>
-    </template>
-    <Description @register="infoRegister" class="enter-y" />
-    <Description @register="register" class="my-4 enter-y" />
-    <Description @register="registerDev" class="enter-y" />
-  </PageWrapper>
+    </div>
+    <!-- 全局 -->
+    <Global v-if="state.curChosed === 1" :showG6="false" />
+    <PCS v-if="state.curChosed === 2" />
+    <BMS v-if="state.curChosed === 3" />
+    <BatteryCluster v-if="state.curChosed === 4" />
+  </div>
 </template>
-<script lang="ts" setup>
-  import { h } from 'vue';
-  import { Tag } from 'ant-design-vue';
-  import { PageWrapper } from '/@/components/Page';
-  import { Description, DescItem, useDescription } from '/@/components/Description/index';
-  import { GITHUB_URL, SITE_URL, DOC_URL } from '/@/settings/siteSetting';
 
-  const { pkg, lastBuildTime } = __APP_INFO__;
-
-  const { dependencies, devDependencies, name, version } = pkg;
-
-  const schema: DescItem[] = [];
-  const devSchema: DescItem[] = [];
-
-  const commonTagRender = (color: string) => (curVal) => h(Tag, { color }, () => curVal);
-  const commonLinkRender = (text: string) => (href) => h('a', { href, target: '_blank' }, text);
-
-  const infoSchema: DescItem[] = [
-    {
-      label: '版本',
-      field: 'version',
-      render: commonTagRender('blue'),
-    },
-    {
-      label: '最后编译时间',
-      field: 'lastBuildTime',
-      render: commonTagRender('blue'),
-    },
-    {
-      label: '文档地址',
-      field: 'doc',
-      render: commonLinkRender('文档地址'),
-    },
-    {
-      label: '预览地址',
-      field: 'preview',
-      render: commonLinkRender('预览地址'),
-    },
-    {
-      label: 'Github',
-      field: 'github',
-      render: commonLinkRender('Github'),
-    },
-  ];
-
-  const infoData = {
-    version,
-    lastBuildTime,
-    doc: DOC_URL,
-    preview: SITE_URL,
-    github: GITHUB_URL,
+<script setup>
+  import Global from '/@/components/DataMonitor/Global/index.vue';
+  import PCS from '/@/components/DataMonitor/PCS/index.vue';
+  import BMS from '/@/components/DataMonitor/BMS/index.vue';
+  import BatteryCluster from '/@/components/DataMonitor/BatteryCluster/index.vue';
+  const state = reactive({
+    choseList: [
+      { key: 1, label: '全部', checked: true },
+      { key: 2, label: 'PCS', checked: false },
+      { key: 3, label: 'BMS', checked: false },
+      { key: 4, label: '电池簇', checked: false },
+    ],
+    // 默认选中的项
+    curChosed: 1,
+  });
+  const choseType = (item) => {
+    state.choseList.forEach((element) => {
+      element.checked = false;
+    });
+    item.checked = true;
+    state.curChosed = item.key;
   };
-
-  Object.keys(dependencies).forEach((key) => {
-    schema.push({ field: key, label: key });
-  });
-
-  Object.keys(devDependencies).forEach((key) => {
-    devSchema.push({ field: key, label: key });
-  });
-
-  const [register] = useDescription({
-    title: '生产环境依赖',
-    data: dependencies,
-    schema: schema,
-    column: 3,
-  });
-
-  const [registerDev] = useDescription({
-    title: '开发环境依赖',
-    data: devDependencies,
-    schema: devSchema,
-    column: 3,
-  });
-
-  const [infoRegister] = useDescription({
-    title: '项目信息',
-    data: infoData,
-    schema: infoSchema,
-    column: 2,
-  });
 </script>
+
+<style lang="less" scoped>
+  .tab {
+    display: inline-block;
+    padding: 2px 16px;
+    // width: 60px;
+    // height: 40px;
+    background-color: transparent;
+    cursor: pointer;
+    text-align: center;
+    // line-height: 40px;
+  }
+
+  .checked {
+    background-color: green;
+    border-radius: 16px;
+  }
+</style>

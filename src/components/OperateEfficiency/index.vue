@@ -63,7 +63,6 @@
     arr.forEach((item) => {
       item.val = initData[item.mark];
     });
-    console.log(arr);
     return arr;
   };
 </script>

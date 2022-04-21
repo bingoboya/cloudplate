@@ -61,7 +61,7 @@
   import GrowCard from './components/GrowCard.vue';
   import OperateEfficiency from '/@/components/OperateEfficiency/index.vue';
   import SiteAnalysis from './components/SiteAnalysis.vue';
-  import NewEnergyPcsCharts from '/@/components/Echarts/NewEnergyPcsCharts.vue';
+  import NewEnergyPcsCharts from '/@/components/Echarts/EnergyPcsCharts.vue';
   const state = reactive({
     cemsSysInfoEfficiency: [],
     sysPoweroptions: [],
@@ -128,7 +128,6 @@
   const optionsListApi = (params) => defHttp.get({ url: '/getshouye/homepage', params });
   const getUserInfomation = async () => {
     const res = await optionsListApi();
-    console.log('optionsListApi----', res);
     const {
       cemsSysInfoEfficiency,
       energyStorageBenefits,

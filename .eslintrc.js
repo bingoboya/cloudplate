@@ -20,11 +20,12 @@ module.exports = defineConfig({
   extends: [
     'plugin:vue/vue3-recommended',
     'plugin:@typescript-eslint/recommended',
-    'prettier',
-    'plugin:prettier/recommended',
-    'plugin:jest/recommended',
+    // 'prettier',
+    // 'plugin:prettier/recommended',
+    // 'plugin:jest/recommended',
   ],
   rules: {
+    "prettier/prettier": "off",
     'vue/script-setup-uses-vars': 'error',
     '@typescript-eslint/ban-ts-ignore': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
