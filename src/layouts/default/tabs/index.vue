@@ -18,7 +18,7 @@
         </TabPane>
       </template>
 
-      <template #tabBarExtraContent v-if="getShowRedo || getShowQuick">
+      <template #rightExtra v-if="getShowRedo || getShowQuick">
         <TabRedo v-if="getShowRedo" />
         <TabContent isExtra :tabItem="$route" v-if="getShowQuick" />
         <FoldButton v-if="getShowFold" />
@@ -79,6 +79,7 @@
       const unClose = computed(() => unref(getTabsState).length === 1);
 
       const getWrapClass = computed(() => {
+        console.log('`${values.prefixCls}-${scope}`', prefixCls);
         return [
           prefixCls,
           {

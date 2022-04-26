@@ -1,10 +1,10 @@
 <!--
- * @Author: Vben
+ * @Author: Bingo
  * @Description: Multi-language switching component
 -->
 <template>
   <Dropdown
-    placement="bottomCenter"
+    placement="bottom"
     :trigger="['click']"
     :dropMenuList="localeList"
     :selectedKeys="selectedKeys"
